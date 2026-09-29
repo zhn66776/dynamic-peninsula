@@ -10,7 +10,7 @@ Dynamic Peninsula 是一个面向 macOS 刘海区域的本地桌面工具。本�
 | --- | --- |
 | 系统 | macOS 26 或更高版本 |
 | 架构 | Apple 芯片 `arm64` 与 Intel `x86_64` |
-| DMG | 约 13.62 MB |
+| DMG | 约 14 MB |
 | 签名 | ad-hoc 签名，未 notarized |
 | 发布范围 | 公共版本，不含本地股票/Portfolio 模块 |
 
