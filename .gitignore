@@ -1,0 +1,8 @@
+# Only reviewed public documents belong in this repository.
+/*
+!/.gitignore
+!/README.md
+!/PRIVACY.md
+!/LICENSE.md
+!/NOTICE.md
+!/THIRD_PARTY_LICENSES.md
