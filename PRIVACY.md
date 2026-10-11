@@ -1,43 +1,35 @@
-# 隐私说明
+# Privacy
 
-最后更新：`public-2.7.3-20260929`
+Dynamic Peninsula runs on your Mac and uses your local applications, accounts, and files.
 
-这份说明适用于 Dynamic Peninsula 公共发行版。应用在用户自己的 Mac 上运行。部分监控会在启动时读取本机已有登录状态，随后向对应服务查询；它不是完全离线应用。
+## Data access
 
-## 应用可能读取的内容
+| Feature | Data used |
+| --- | --- |
+| Music | Now Playing information and music-app controls |
+| Codex | Local login credentials, account usage, and session statistics |
+| Claude | A session key in macOS Keychain, account usage, and session statistics |
+| AgentLight | Local session status files |
+| Clipboard | Items copied to the system clipboard |
+| Shelf and AirDrop | Files and links you select or drag into the app |
+| System monitor | CPU, GPU, memory, storage, temperature, and fan readings |
+| Calendar, camera, and HUD | The macOS permissions for each integration |
 
-| 功能 | 可能使用的本机数据或权限 | 用途 |
-| --- | --- | --- |
-| 音乐控制 | 已安装音乐应用的应用事件、Now Playing 信息和用户允许的控制权限 | 显示曲目状态并提供播放控制 |
-| Codex | 用户自己 Mac 上已有的登录/授权状态，以及用户账号的用量接口 | 显示账户用量、额度或重置状态 |
-| Claude | 用户自己提供或已有的 Claude 登录状态，以及 Claude 用量接口 | 显示账户用量与状态 |
-| AgentLight | 用户自己 Mac 上的 agent 状态文件和本机状态 | 显示 agent 是否运行或需要注意 |
-| 剪贴板 | 用户复制到系统剪贴板的内容 | 提供剪贴板历史查看与再次复制 |
-| Shelf / AirDrop | 用户拖入或选择的文件、链接和 AirDrop 结果 | 暂存、预览、分享或移除用户选择的项目 |
-| 系统监控 | CPU、GPU、内存、磁盘、温度和风扇等本机指标 | 显示系统状态与短时详情 |
-| 日历、摄像头及 HUD | 用户授予的日历、摄像头、应用事件等 macOS 权限 | 提供对应的本地集成功能 |
+## Account requests
 
-这些数据来自使用者自己的 Mac。公共 DMG 不包含开发者的账户凭据、个人文件、股票快照或 Portfolio 数据，也不把股票/Portfolio 模块编译进公共版本。
+Account monitors start with the app and use credentials saved on the Mac:
 
-## 网络请求
+- **Codex** reads `~/.codex/auth.json` and queries usage and credits at `chatgpt.com`. Expired access tokens are refreshed through `auth.openai.com`. Refreshed tokens stay in process memory.
+- **Claude** reads the saved session key from macOS Keychain and queries organization and usage information at `claude.ai`.
 
-启动应用后，若本机存在相应凭据，会自动进行以下请求，无需先打开对应标签页：
+Authentication information goes directly to the corresponding service.
 
-- **Codex**：读取本机 `~/.codex/auth.json`，向 `chatgpt.com` 的账户用量与额度接口发起认证请求。令牌失效时可能向 `auth.openai.com` 请求刷新；本应用的刷新结果保存在内存中，不写回该登录文件。
-- **Claude**：从 macOS 钥匙串读取用户保存的 session key，向 `claude.ai` 查询组织与用量。没有 session key 时不会发起这些账户请求。
+Opening the Codex or Claude tab reads `~/.codex/sessions` or `~/.claude/projects` to calculate session statistics. AgentLight reads `~/.agentlight` and updates stale running states to idle. Download progress uses the Downloads folder.
 
-打开 Codex 或 Claude 标签页后，会分别扫描本机 `~/.codex/sessions` 或 `~/.claude/projects`，计算用量统计。AgentLight 集成会读取 `~/.agentlight`，并可能在状态过期时写入本机 idle 状态。下载进度功能会观察本机 Downloads 文件夹。
+## Local storage
 
-这些是对安装者本机数据的运行时访问，不是随安装包附带的数据。账户查询会将认证信息发送给对应服务，服务方如何处理这些请求受其隐私政策约束。
+Preferences, permissions, clipboard history, and Shelf items are stored locally. Preferences and saved items persist after the app is removed.
 
-该 App 没有要求用户把凭据交给发布者，也不在发行包内预置可供所有安装者使用的凭据。用户应只在自己信任的系统设置或应用界面中授予权限。当前版本没有统一的离线模式开关；若不希望启动时使用已有账号状态，应退出应用。
+## Contact
 
-## 本地保存与删除
-
-设置、剪贴板历史、Shelf 项目和应用授权可能由 macOS 或应用保存，以便下次启动继续使用。删除 App 不一定会同时删除 macOS 的应用支持数据或用户主动选择保存的文件；如需清理，请使用应用提供的设置或 macOS 的应用数据管理方式，并先确认不再需要其中的 Shelf、剪贴板或授权信息。
-
-## 公共发行版的边界
-
-公共版本和开发者个人使用的 `Personal Build` 分开构建。公共版本不读取个人 Portfolio 数据，也没有股票通知功能；本地 Codex、Claude、AgentLight、音乐和文件相关功能仍然取决于安装者自己的应用、账号和权限。
-
-如果发现与隐私或凭据处理有关的问题，请在 [项目 Issues](https://github.com/zhn66776/dynamic-peninsula/issues) 中提供不含 token、cookie、个人文件或其他敏感信息的复现描述。
+Report privacy issues with a redacted reproduction in [Issues](https://github.com/zhn66776/dynamic-peninsula/issues).

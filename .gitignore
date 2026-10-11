@@ -6,3 +6,6 @@
 !/LICENSE.md
 !/NOTICE.md
 !/THIRD_PARTY_LICENSES.md
+
+# The root allowlist above also excludes local assistant files and logs.
+# Examples: AGENTS.md, CLAUDE.md, .codex/, .claude/, .cursor/, *.log, *.jsonl.
