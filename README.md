@@ -4,8 +4,6 @@ Dynamic Peninsula is a macOS notch app for music controls, system monitoring, cl
 
 [Release page](https://github.com/zhn66776/dynamic-peninsula/releases/tag/public-2.7.3-20260929) · macOS 26 or later · Apple silicon and Intel · Xcode 27 · Swift / SwiftUI / AppKit
 
-The Public Release excludes the developer's personal stock and Portfolio module. The separate `Personal Build` keeps that local functionality.
-
 ## Public Release
 
 - Universal app: `arm64` and `x86_64`.
@@ -24,11 +22,11 @@ The application is based on [Boring Notch by TheBoredTeam](https://github.com/Th
 - **Codex and Claude:** account quota queries, reset-credit displays, usage charts, approval status, and local agent indicators in [`CodexAccountClient.swift`](boringNotch/managers/CodexAccountClient.swift), [`CodexQuotaMonitor.swift`](boringNotch/managers/CodexQuotaMonitor.swift), [`ClaudeQuotaMonitor.swift`](boringNotch/managers/ClaudeQuotaMonitor.swift), [`CodexUsageStatsService.swift`](boringNotch/managers/CodexUsageStatsService.swift), [`ClaudeUsageStatsService.swift`](boringNotch/managers/ClaudeUsageStatsService.swift), [`AgentApprovalMonitor.swift`](boringNotch/managers/AgentApprovalMonitor.swift), and [`AgentBreathingMonitor.swift`](boringNotch/managers/AgentBreathingMonitor.swift).
 - **Downloads and network alerts:** Downloads-folder progress and reachability alerts in [`DownloadProgressMonitor.swift`](boringNotch/managers/DownloadProgressMonitor.swift), [`DownloadProgressDropdown.swift`](boringNotch/components/Live%20activities/DownloadProgressDropdown.swift), [`NetworkConnectivityMonitor.swift`](boringNotch/managers/NetworkConnectivityMonitor.swift), and [`NetworkAlertDropdown.swift`](boringNotch/components/Notch/NetworkAlertDropdown.swift).
 
-The stock files are excluded from the public target through the `PUBLIC_RELEASE` build configuration. The public entitlements are in [`Configuration/PublicRelease.entitlements`](Configuration/PublicRelease.entitlements), and the target and scheme are defined in [`project.pbxproj`](boringNotch.xcodeproj/project.pbxproj) and [`Public Release.xcscheme`](boringNotch.xcodeproj/xcshareddata/xcschemes/Public%20Release.xcscheme).
+The app entitlements are in [`Configuration/PublicRelease.entitlements`](Configuration/PublicRelease.entitlements), and the target and scheme are defined in [`project.pbxproj`](boringNotch.xcodeproj/project.pbxproj) and [`Public Release.xcscheme`](boringNotch.xcodeproj/xcshareddata/xcschemes/Public%20Release.xcscheme).
 
 ## Architecture
 
-The code combines Swift, SwiftUI, AppKit/Cocoa, Swift Concurrency, XPC, IOKit, AppleSMC, IOReport, AGX metrics, Metal, and XCTest. The app process owns presentation and public metrics. The embedded `BoringNotchXPCHelper` XPC service handles Accessibility requests and private hardware reads, with typed request/response models and a bounded request path in [`BoringNotchXPCHelperProtocol.swift`](BoringNotchXPCHelper/BoringNotchXPCHelperProtocol.swift) and [`SystemMonitorXPCModels.swift`](boringNotch/SystemMonitor/Models/SystemMonitorXPCModels.swift).
+The app process renders SwiftUI and AppKit views, coordinates sampling with Swift Concurrency, and collects public system metrics. The `BoringNotchXPCHelper` XPC service handles Accessibility and hardware reads through IOKit, AppleSMC, and IOReport. The request and response types are defined in [`BoringNotchXPCHelperProtocol.swift`](BoringNotchXPCHelper/BoringNotchXPCHelperProtocol.swift) and [`SystemMonitorXPCModels.swift`](boringNotch/SystemMonitor/Models/SystemMonitorXPCModels.swift).
 
 The system-monitor tests cover public metric providers, CPU and storage calculations, sampling policy, stale data, alert behavior, XPC schema/fixture decoding, and hardware fixtures. Start with [`SystemPublicMetricsProviderTests.swift`](boringNotchTests/SystemMonitor/SystemPublicMetricsProviderTests.swift), [`SamplerStoreAndAlertTests.swift`](boringNotchTests/SystemMonitor/SamplerStoreAndAlertTests.swift), and [`XPCContractAndFixtureTests.swift`](boringNotchTests/SystemMonitor/XPCContractAndFixtureTests.swift).
 
@@ -78,7 +76,7 @@ xcodebuild \
   test
 ```
 
-The `Public Release` scheme runs the functional and fixture tests. The `M3 Hardware Diagnostics` scheme runs the AGX readback and GPU-load checks for the original M3 hardware setup:
+The `Public Release` scheme runs the functional and fixture tests. Run the AGX readback and GPU-load diagnostics with:
 
 ```sh
 xcodebuild -project boringNotch.xcodeproj \
