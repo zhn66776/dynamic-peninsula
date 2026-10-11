@@ -1,0 +1,1 @@
+{"schemaVersion":1,"chipFamily":"M3","performanceIndices":[4,5,6,7],"efficiencyIndices":[0,1,2,3],"hasFanHardware":true,"fans":[0],"gpu":{"device":38,"renderer":37,"tiler":38},"cpuTemperatures":[65.7,68.4],"gpuTemperatures":[55.6,56.0]}

@@ -1,0 +1,1 @@
+{"schemaVersion":1,"chipFamily":"M4","performanceIndices":[4,5,6,7,8,9,10,11],"efficiencyIndices":[0,1,2,3],"hasFanHardware":true,"fans":[1800],"gpu":{"device":45,"renderer":null,"tiler":43},"cpuTemperatures":[58],"gpuTemperatures":[52]}

@@ -1,11 +1,63 @@
-# Only reviewed public documents belong in this repository.
-/*
-!/.gitignore
-!/README.md
-!/PRIVACY.md
-!/LICENSE.md
-!/NOTICE.md
-!/THIRD_PARTY_LICENSES.md
+# Xcode and build output
+/build/
+/DerivedData/
+**/xcuserdata/
+*.xcuserstate
+*.xcuserdatad/
+*.pbxuser
+*.xccheckout
+*.xcarchive/
+*.xcresult/
+*.app/
+*.dSYM/
+*.ipa
 
-# The root allowlist above also excludes local assistant files and logs.
-# Examples: AGENTS.md, CLAUDE.md, .codex/, .claude/, .cursor/, *.log, *.jsonl.
+# Dependency caches
+/.build/
+/.swiftpm/
+Pods/
+Carthage/Build/
+
+# Local editors and filesystem metadata
+.DS_Store
+._*
+__MACOSX/
+.vscode/
+.idea/
+*.swp
+*.swo
+*.tmp
+
+# Credentials and signing material
+.env
+.env.*
+*.pem
+*.p12
+*.pfx
+*.key
+*.mobileprovision
+*.provisionprofile
+auth.json
+credentials.json
+
+# Local assistant settings and activity records
+.codex/
+.claude/
+.cursor/
+.agents/
+.copilot/
+.aider*
+.github/instructions/
+.github/prompts/
+*.log
+*.jsonl
+*.ndjson
+*.xcactivitylog
+logs/
+agent-logs/
+chat-history/
+transcripts/
+
+# Keep README documents; exclude development notes and reports
+*.[mM][dD]
+![rR][eE][aA][dD][mM][eE].[mM][dD]

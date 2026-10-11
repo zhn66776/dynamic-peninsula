@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>XPCService</key>
+	<dict>
+		<key>ServiceType</key>
+		<string>Application</string>
+	</dict>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>Used to show connected Bluetooth accessories' (AirPods etc.) battery level in the notch.</string>
+</dict>
+</plist>
